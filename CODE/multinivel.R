@@ -15,10 +15,10 @@ library(grid) #to export the table
 library(pROC) # for the ROC curve
 
 #Cargar datos
-data = st_read("G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/Modelo_Multiniveles/DATA/df_catchments_spatial.gpkg", quiet = TRUE)
+data = st_read("G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/ModeloMultinivel/DATA/df_catchments_spatial.gpkg", quiet = TRUE)
 
 #Para guardar datos
-savefile <- "G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/Modelo_Multiniveles/FIGURAS/"
+savefile <- "G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/ModeloMultinivel/FIGURAS/"
 
 # Create Y_bin as 1 if lands_rec is 1 or greater, otherwise 0
 data$Y_bin <- ifelse(data$lands_rec >= 1, 1, 0)
@@ -138,7 +138,7 @@ kable(
 summary_text <- capture.output(summary(m2))
 
 # Create a PNG file with higher resolution
-png("G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/Modelo_Multiniveles/FIGURAS/m2_summary.png", width = 4000, height = 5300, res = 500)
+png("G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/ModeloMultinivel/FIGURAS/m2_summary2.png", width = 4300, height = 5300, res = 100)
 
 # Plot the summary text as an image using grid graphics
 grid.newpage()
@@ -289,12 +289,12 @@ roc_plot <- ggplot(roc_data, aes(x = specificity, y = sensitivity, color = model
 print(roc_plot)
 
 # Save the plot to a file
-ggsave("G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/Modelo_Multiniveles/FIGURAS/roc_curve_plot.png", plot = roc_plot, width = 8, height = 6, dpi = 300)
+ggsave("G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/ModeloMultinivel/FIGURAS/roc_curve_plot2.png", plot = roc_plot, width = 8, height = 6, dpi = 100)
 
 ##################################################
 
 g <- ggplot() +
-  geom_sf(data = data, aes(fill = m2_fitted), color = "black") +
+  geom_sf(data = data, aes(fill = m2fitted), color = "black") +
   annotation_scale(location = "br", style = "ticks") +
   annotation_north_arrow(location = "tr", which_north = "true", height = unit(0.7, "cm"), width = unit(0.6, "cm")) +
   scale_fill_gradientn(colors = c("blueviolet","blue","cornflowerblue","cyan2","green","greenyellow", "yellow", "orange","orangered","red"), name ="Susceptibilidad") +
@@ -318,4 +318,4 @@ g <- ggplot() +
 # Plot the figure before saving
 print(g)
 
-ggsave(filename = "G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/Modelo_Multiniveles/FIGURAS/Mapafinal.png", plot = g, width = 7, height = 8.5, units = "in", dpi = 500)
+ggsave(filename = "G:/My Drive/INVESTIGACION/PAPERS/ELABORACION/ModeloMultinivel/FIGURAS/Mapafinal2.png", plot = g, width = 7, height = 8.5, units = "in", dpi = 100)
